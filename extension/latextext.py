@@ -2,6 +2,8 @@
 from __future__ import print_function
 
 import sys
+reload(sys)
+sys.setdefaultencoding('UTF8')
 import math
 import os
 import glob
