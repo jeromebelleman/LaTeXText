@@ -651,9 +651,9 @@ if STANDALONE is False:
             self.OptionParser.add_option("-m", "--math", type='inkbool',
                                          action="store", dest="math",
                                          help="encapsulate all text in math mode")
-            self.OptionParser.add_option("-s", "--shell-escape", type='inkbool',
+            self.OptionParser.add_option("-e", "--shell-escape", type='inkbool',
                                          action="store", dest="shellescape",
-                                         help="Pass -shell-escape option")
+                                         help="pass -shell-escape option")
 
         def effect(self):
             if self.options.debug is True:

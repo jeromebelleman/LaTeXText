@@ -12,7 +12,7 @@
 	<param name="newline" type="boolean" gui-text="Add \\ at every line break">false</param>
 	<param name="math" type="boolean" gui-text="Encapsulate all text in math mode">false</param>
 	<param name="log" type="boolean" gui-text="Show log messages">false</param>
-	<param name="shell" type="boolean" gui-text="Pass -shell-escape option">false</param>
+	<param name="shell-escape" type="boolean" gui-text="Pass -shell-escape option">false</param>
 	<effect>
 		<object-type>all</object-type>
 		<effects-menu>
