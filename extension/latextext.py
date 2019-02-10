@@ -530,7 +530,7 @@ class Latex2SvgRenderer:
         preamble = ""
         if preamble_file:
             log_debug("Loading preamble from " + preamble_file)
-            with open(preamble_file, 'r') as preamble_file:
+            with open(os.path.expanduser(preamble_file), 'r') as preamble_file:
                 preamble = preamble_file.read()
 
         if fontsize in [10, 11, 12]:

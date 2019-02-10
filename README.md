@@ -106,8 +106,10 @@ GTK3 is not available.
 #### Options ####
 
   * _Preamble File_ -- A Latex preamble file to load and configure additional
-    packages. The `\documentclass` and `\begin{document}` should not be included,
-    see the `preambles/` subfolder for examples.
+    packages. Its path is relative to `~/.config/inkscape/extensions`. An
+    absolute path with an initial component of `~` is supported. The
+    `\documentclass` and `\begin{document}` should not be included, see the
+    `preambles/` subfolder for examples.
     
   * _Additional Packages_ -- A comma separated list of additional Latex packages 
     that should be loaded.
