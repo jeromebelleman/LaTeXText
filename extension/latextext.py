@@ -472,7 +472,7 @@ class SvgProcessor:
             if self.options.math and latex_string[0] is not '$':
                 latex_string = '$' + latex_string + '$'
             log_debug(latex_string)
-            rendergroup = lat2svg.render(latex_string, self.options.preamble, self.options.packages, self.options.fontsize, self.options.scale, self.options.shellescape)
+            rendergroup = lat2svg.render(latex_string, self.options.preamble, self.options.packages, self.options.fontsize, self.options.scale, self.options.shellescape, self.options.keeptemp)
             rendergroup = self.align_placement(rendergroup, txt)
             # rendergroup = self.apply_style(rendergroup, txt)
             self.add_id_prefix(rendergroup, 'lx-' + txt.attrib['id'])
@@ -518,7 +518,7 @@ class Latex2SvgRenderer:
         return out + err
 
     # render given latex code and return the result as an SVG group element
-    def render(self, latex_code, preamble_file=None, package_list="", fontsize=10, scale=1, shellescape=False):
+    def render(self, latex_code, preamble_file=None, package_list="", fontsize=10, scale=1, shellescape=False, keeptemp=False):
 
         # Options pass to LaTeX-related commands
         shellescapeOpt = ['-shell-escape'] if shellescape else []
@@ -603,7 +603,8 @@ r"""\documentclass[%dpt]{%s}
             rendergroup.append(e)
 
         os.chdir(old_cwd)
-        shutil.rmtree(tmp_path)  # delete temp directory
+        if not keeptemp:
+            shutil.rmtree(tmp_path)  # delete temp directory
         return rendergroup
 
 
@@ -654,6 +655,9 @@ if STANDALONE is False:
             self.OptionParser.add_option("-e", "--shell-escape", type='inkbool',
                                          action="store", dest="shellescape",
                                          help="pass -shell-escape option")
+            self.OptionParser.add_option("-t", "--keep-temp", type='inkbool',
+                                         action="store", dest="keeptemp",
+                                         help="keep temp directory")
 
         def effect(self):
             if self.options.debug is True:
