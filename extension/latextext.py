@@ -426,7 +426,7 @@ class SvgProcessor:
         if self.options.math is not None:
             render_layer.attrib['{%s}math' % RENDLTX_NS] = str(self.options.math)
 
-    def run(self):
+    def run(self, selected=None):
 
         lat2svg = Latex2SvgRenderer()
 
@@ -448,7 +448,10 @@ class SvgProcessor:
         else:
             line_ending = '\n'
 
-        text_nodes = self.docroot.findall('.//{%s}text' % SVG_NS)
+        if selected:
+            text_nodes = selected.values()
+        else:
+            text_nodes = self.docroot.findall('.//{%s}text' % SVG_NS)
         log_debug(str(len(text_nodes)) + " text nodes were found.")
         for txt in text_nodes:
             if self.options.depth > 0 and txt.xpath('count(ancestor::*)') > self.options.depth + 1:
@@ -665,7 +668,7 @@ if STANDALONE is False:
             if self.options.debug is True:
                 set_log_level(log_level_debug)
             svgprocessor = SvgProcessor(self.document, self.options)
-            svgprocessor.run()
+            svgprocessor.run(self.selected)
 else:
     # Create a standalone commandline application
     def main_standalone():
